@@ -1,0 +1,44 @@
+    <html>
+        <head>
+            <title>Security Camera</title>
+            <script>
+                async function soundAlarm() {
+                    const btn = document.getElementById('alarmBtn');
+                    btn.disabled = true;
+                    btn.innerText = 'Ringing...';
+
+                    await fetch('/trigger-alarm', { method: 'POST' });
+
+                    setTimeout(() => {
+                        btn.disabled = false;
+                        btn.innerText = 'TRIGGER ALARM';
+                    }, 3000);
+                }
+
+                document.getElementById('time').innerHTML = new Date().toLocaleTimeString();
+            </script>
+
+        </head>
+        <body style="background: #222; color: white; text-align: center; font-family: sans-serif;">
+            <h1>Live Feed (updates every 10s)</h1>
+            <img src="/latest" style="max-width: 90%; border: 5px solid #444;">
+            <p>Last refresh: <span id="time"></span></p>
+
+            <button id="alarmBtn" onclick="soundAlarm()"
+                style="padding: 20px 40px; font-size: 24px; background: red; color: white; border: none; border-radius: 10px; cursor: pointer;">
+                TRIGGER ALARM
+            </button>
+
+            <div style="margin: 20px 0;">
+                <a href="/history" style="padding: 15px 30px; font-size: 18px; background: #444; color: white; border-radius: 10px; text-decoration: none; display: inline-block;">
+                    VIEW CAPTURED HISTORY
+                </a>
+            </div>
+
+            <p>Tempature: {{ tempature_to_show }}</p>
+            <p>Average Tempature: {{ avg_temp }}</p>
+            <p>Until Harvest: {{ sum_temp }}</p>
+            <p>TET Tempature: {{ TET }}</p>
+
+        </body>
+    </html>

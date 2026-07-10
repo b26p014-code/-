@@ -1,0 +1,13 @@
+[Unit]
+Description=Ngrok HTTP 8080 Tunnel
+After=network.target
+
+[Service]
+Type=simple
+User=your_username
+ExecStart=/usr/local/bin/ngrok http 8080
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

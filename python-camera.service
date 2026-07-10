@@ -1,0 +1,14 @@
+[Unit]
+Description=Python Camera Test Remote Service
+After=network.target
+
+[Service]
+Type=simple
+User=your_username
+WorkingDirectory=/path/to/your/script/directory
+ExecStart=/usr/bin/python3 /path/to/your/script/camera_test_remote.py
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
